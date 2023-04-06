@@ -1,4 +1,4 @@
-import { TaskStatus } from "../task.entity";
+import { TaskStatus } from "../entities/task.entity";
 import { IsNotEmpty, IsString, MinLength, MaxLength, IsOptional, IsIn } from "class-validator"
 export class CreateTaskDto {
     @IsString()

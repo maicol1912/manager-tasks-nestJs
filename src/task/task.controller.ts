@@ -1,11 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { Task } from './task.entity';
+import { Task } from './entities/task.entity';
 import { CreateTaskDto, UpdateTaskDto } from './dto/task.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('task')
 @Controller('task')
 export class TaskController {
-  constructor(private taskService:TaskService){}
+  /*constructor(private taskService:TaskService){}
 
   @Get()
   getTasks() {
@@ -30,5 +32,5 @@ export class TaskController {
   @Patch(':id')
   updateTask(@Param('id')id:string,@Body()taskUpdated:UpdateTaskDto){
     return this.taskService.updateTask(id,taskUpdated)
-  }
+  }*/
 }
