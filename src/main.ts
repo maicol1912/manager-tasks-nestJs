@@ -10,7 +10,10 @@ async function bootstrap() {
   //para usar las validaciones usadas de class-validator
   app.useGlobalPipes(new ValidationPipe)
   
-  app.setGlobalPrefix('api')
+  //Endpoint adicional para agrgar a la app
+  //app.setGlobalPrefix('api')
+
+
   //generate documentation with swagger
   const config = new DocumentBuilder()
   .setTitle('Task api example')

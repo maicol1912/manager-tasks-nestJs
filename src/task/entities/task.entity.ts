@@ -1,6 +1,7 @@
-import {Table,Column,Model,DataType} from "sequelize-typescript"
-
-export enum TaskStatusEnum{
+/*
+TODO: CONFIGURACION DE MODELO POR MEDIO DE SEQUELIZE
+export class Task extends Model{
+    export enum TaskStatusEnum{
     PENDING = 'PENDING',
     IN_PROGRESS = 'IN_PROGRESS',
     DONE = 'DONE'
@@ -11,8 +12,6 @@ export enum TaskStatusEnum{
     timestamps: false,
     underscored: true,
 })
-export class Task extends Model{
-    
     @Column({
         type: DataType.INTEGER,
         primaryKey: true,
@@ -42,4 +41,4 @@ export class Task extends Model{
     })
     status:TaskStatusEnum
 }
-
+*/

@@ -1,8 +1,9 @@
 import { TaskModule } from './task/task.module';
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
-import { databaseProviders } from './database/database.providers';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSourceConfig } from './database/data.source';
 
 @Module({
   imports: [
@@ -10,12 +11,9 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: `.${process.env.NODE_ENV}.env`,
       isGlobal:true
     }),
-    TaskModule,
+    TypeOrmModule.forRoot({...DataSourceConfig}),
     UserModule,
     
   ],
-  controllers: [],
-  providers: [...databaseProviders],
-  exports:[...databaseProviders]
 })
 export class AppModule {}
