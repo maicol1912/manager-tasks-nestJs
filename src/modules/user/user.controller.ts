@@ -2,33 +2,42 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { UserToProjectDto } from './dto/user-project.dto';
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('register')
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+  public async create(@Body() createUserDto: CreateUserDto) {
+    return await this.userService.createUser(createUserDto);
   }
 
   @Get('all')
-  findAll() {
-    return this.userService.findAll();
+  public async findAll() {
+    return await this.userService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+  public async findOne(@Param('id') id: string) {
+    return await this.userService.findOne(id);
   }
 
+  @Post('add-to-project')
+  public async userInProject(@Body() body: UserToProjectDto) {
+    return await this.userService.relationToProject(body);
+  }
+
+
   @Patch('edit/:id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.updateUser(id, updateUserDto);
+  public async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return await this.userService.updateUser(id, updateUserDto);
   }
 
   @Delete('delete/:id')
-  remove(@Param('id') id: string) {
-    return this.userService.deletUser(id);
+  public async remove(@Param('id') id: string) {
+    return await this.userService.deletUser(id);
   }
 }

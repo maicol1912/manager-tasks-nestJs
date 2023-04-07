@@ -3,7 +3,7 @@ export enum ROLES {
     ADMIN = 'ADMIN'
 }
 
-export enum ACCES_LEVEL {
+export enum ACCESS_LEVEL {
     MANTEINER = 40,
     OWNER = 50,
 }   

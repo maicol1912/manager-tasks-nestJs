@@ -28,5 +28,5 @@ export class UserEntity extends BaseEntity implements IUser {
     role:ROLES
 
     @OneToMany(()=>UserProjectsEntity,(userProjects)=>userProjects.user)
-    usersIncludes:UserProjectsEntity[]
+    projectsIncludes:UserProjectsEntity[]
 }

@@ -5,12 +5,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ErrorManager } from 'src/utils/error.manager';
+import { UserProjectsEntity } from './entities/usersProjects.entity';
+import { UserToProjectDto } from './dto/user-project.dto';
 
 @Injectable()
 export class UserService {
 
   constructor(
-    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>
+    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(UserProjectsEntity) private readonly userProjectRepository: Repository<UserProjectsEntity>
   ) { }
 
   public async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
@@ -44,6 +47,11 @@ export class UserService {
     try {
       const user:UserEntity = await this.userRepository.createQueryBuilder('user')
       .where({ id })
+      //se relaciona con el atributo projectsIncludes que ya despues accede a la tabla de relaciones y
+      //accede a la tabla de project para traer los datos 
+      //el user que se coloca en createQueryBuilder es como el nombre de la tabla
+      .leftJoinAndSelect('user.projectsIncludes','projectsIncludes')
+      .leftJoinAndSelect('projectsIncludes.project','project')
       .getOne()
       if(!user){
         throw new ErrorManager({
@@ -90,5 +98,13 @@ export class UserService {
       throw ErrorManager.createSignatureError(error.message)
     }
     
+  }
+
+  public async relationToProject(body:UserToProjectDto):Promise<UserProjectsEntity>{
+    try {
+      return await this.userProjectRepository.save(body)
+    } catch (error) {
+      throw ErrorManager.createSignatureError(error.message)
+    }
   }
 }

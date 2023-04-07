@@ -24,7 +24,8 @@ async function bootstrap() {
     .setTitle('Task api example')
     .setDescription('Api crud about tasks')
     .setVersion('1.0')
-    .addTag('task')
+    .addTag('user')
+    .addTag('project')
     .build()
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('documentation', app, document)
