@@ -1,8 +1,8 @@
 import { Entity,Column,ManyToOne } from 'typeorm';
-import { ACCES_LEVEL } from "../../constants/roles";
-import { BaseEntity } from "../../database/base.entity";
+import { ACCES_LEVEL } from "../../../constants/roles";
+import { BaseEntity } from "../../../database/base.entity";
 import { UserEntity } from './user.entity';
-import { ProjectEntity } from '../../modules/project/entities/project.entity';
+import { ProjectEntity } from '../../../modules/project/entities/project.entity';
 
 @Entity({name:'users-projects'})
 export class UserProjectsEntity extends BaseEntity{

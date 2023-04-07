@@ -6,3 +6,8 @@
   --SE DEBE CORRER EL COMANDO npm run m:gen -- .\migrations\init para que se genere el modelo de base de datos definida
 
   --LAS UBICACIONES DE LAS ENTIDADES NO PUEDEN SER RELATICAS CON SRC SINO DEFINITICAS CON ../ 
+
+  --DESPUES DE CORRER LAS MIGRACIONES CON m:gen
+  --DEBEMOS CORRER EL m:run con npm run m:run
+
+  --DEBEMOS EXCLUIR LA COMPILACION DE EL MIGRATION DESDE EL TSCONFIG

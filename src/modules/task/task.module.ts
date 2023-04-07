@@ -1,5 +1,7 @@
 
-import { Module } from '@nestjs/common';
+/*
+TODO:MODULO DE TASK
+mport { Module } from '@nestjs/common';
 import { TaskController } from './task.controller';
 import { TaskService } from './task.service';
 
@@ -9,3 +11,4 @@ import { TaskService } from './task.service';
 
 })
 export class TaskModule {}
+*/

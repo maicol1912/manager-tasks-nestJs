@@ -1,4 +1,5 @@
-import { TaskStatusEnum } from "../entities/task.entity";
+/*
+TODO: DTO DE LA CLASE TASK, QUE FUE DESACTIVADA
 import { IsNotEmpty, IsString, MinLength, MaxLength, IsOptional, IsIn } from "class-validator"
 export class CreateTaskDto {
     @IsString()
@@ -26,4 +27,4 @@ export class UpdateTaskDto {
     @IsOptional()
     @IsIn([TaskStatusEnum.IN_PROGRESS, TaskStatusEnum.DONE, TaskStatusEnum.PENDING])
     status?: TaskStatusEnum
-}
+}*/

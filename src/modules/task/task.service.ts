@@ -1,3 +1,5 @@
+/*
+TODO:SERVICIO DEL MODULO TASK
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatusEnum } from './entities/task.entity';
 import { CreateTaskDto, UpdateTaskDto } from './dto/task.dto';
@@ -34,10 +36,10 @@ export class TaskService {
     }
 
     async updateTask(id:string,taskUpdate:UpdateTaskDto):Promise<Task>{
-        /*const task = this.getTaskById(id);
+        const task = this.getTaskById(id);
         const newTask = Object.assign(task,updatedFiles)
         this.tasks.map(task => task.id === id ? newTask:task);
-        return newTask;*/
+        return newTask;
         const updatedTask = await Task.update(taskUpdate, {
             where: { id },
             returning: true, // devuelve el registro actualizado
@@ -45,3 +47,4 @@ export class TaskService {
         return updatedTask[0][1];
     }
 }
+*/
