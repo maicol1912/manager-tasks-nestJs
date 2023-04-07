@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Task, TaskStatus } from './entities/task.entity';
-import {v4} from "uuid"
+import { Task, TaskStatusEnum } from './entities/task.entity';
 import { CreateTaskDto, UpdateTaskDto } from './dto/task.dto';
 @Injectable()
 export class TaskService {
@@ -15,24 +14,26 @@ export class TaskService {
         return task;
     }
 
-    createTask(task:CreateTaskDto){
+    async createTask(task:CreateTaskDto){
         const {title,description} = task
 
-        Task.create({
+        await Task.create({
             title,
             description,
-            status:TaskStatus.PENDING
+            status:TaskStatusEnum.PENDING,
         })
         
-        return "saved succesfully";
+        return {"message":"saved succesfully"};
     }
 
-    deleteTask(idTask:string){
+    async deleteTask(idTask:string){
         //this.tasks = this.tasks.filter(task => task.id !==id)
-        return Task.destroy({where:{id:idTask}})
+        const task = Task.findOne({where:{id:idTask}})
+        await Task.destroy({where:{id:idTask}})
+        return 
     }
 
-    async updateTask(id:string,taskUpdate:UpdateTaskDto){
+    async updateTask(id:string,taskUpdate:UpdateTaskDto):Promise<Task>{
         /*const task = this.getTaskById(id);
         const newTask = Object.assign(task,updatedFiles)
         this.tasks.map(task => task.id === id ? newTask:task);
@@ -41,6 +42,6 @@ export class TaskService {
             where: { id },
             returning: true, // devuelve el registro actualizado
           });
-        return updatedTask;
+        return updatedTask[0][1];
     }
 }

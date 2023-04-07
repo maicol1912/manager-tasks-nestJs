@@ -1,42 +1,45 @@
-import {Table,Column,CreatedAt,Model,DataType} from "sequelize-typescript"
+import {Table,Column,Model,DataType} from "sequelize-typescript"
 
-export enum TaskStatus{
+export enum TaskStatusEnum{
     PENDING = 'PENDING',
     IN_PROGRESS = 'IN_PROGRESS',
     DONE = 'DONE'
 }
 
-@Table({ timestamps: false })
+@Table({
+    tableName: 'tasks',
+    timestamps: false,
+    underscored: true,
+})
 export class Task extends Model{
     
     @Column({
-        type: DataType.UUID,
-        defaultValue: DataType.UUIDV4,
+        type: DataType.INTEGER,
         primaryKey: true,
+        autoIncrement:true,
+        field:'id_task'
     })
     id:string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
-        unique:true
+        unique:true,
+        field:'title_task'
     })
     title :string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
+        field:'description_task'
     })
     description:string;
 
     @Column({
-        type: DataType.STRING,
-        allowNull: false,
+        type:DataType.ENUM('PENDING','IN_PROGRESS','DONE'),
+        field:'status_task'
     })
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    status:TaskStatus
+    status:TaskStatusEnum
 }
 
