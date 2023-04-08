@@ -1,6 +1,6 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory,Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe,ClassSerializerInterceptor } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CORS } from './constants/cors';
 async function bootstrap() {
@@ -13,7 +13,12 @@ async function bootstrap() {
     transformOptions: {
       enableImplicitConversion: true
     }
-  }))
+  }));
+
+  //se utiliza para poder usar el class transformer es decir por ejemplo para excluir la contraseña en los
+  //datos que nos trae la entidad
+  const reflector = app.get(Reflector)
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector))
 
   //Endpoint adicional para agrgar a la app
   //app.setGlobalPrefix('api')
