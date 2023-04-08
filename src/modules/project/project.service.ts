@@ -5,12 +5,14 @@ import { ProjectEntity } from './entities/project.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ErrorManager } from 'src/utils/error.manager';
+import { UserProjectsEntity } from '../user/entities/usersProjects.entity';
 
 @Injectable()
 export class ProjectService {
   constructor(
-    @InjectRepository(ProjectEntity) private readonly projectRepository: Repository<ProjectEntity>
-  ) { }
+    @InjectRepository(ProjectEntity) private readonly projectRepository: Repository<ProjectEntity>,
+    @InjectRepository(UserProjectsEntity)private readonly userProjectRepository: Repository<UserProjectsEntity>
+    ) { }
 
   public async createProject(createProjectDto: CreateProjectDto): Promise<ProjectEntity> {
     try {

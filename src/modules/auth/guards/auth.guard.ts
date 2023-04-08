@@ -18,18 +18,22 @@ export class AuthGuard implements CanActivate {
   ){
     //estamos validando los decoradores de los controller, es decir si el valor de el controllador es publico
     //este puede ingresar debido a que devuelve un true
+    
     const isPublic = this.reflector.get<boolean>(
       PUBLIC_KEY,
       context.getHandler()
     )
-
+    //TODO: SI ES PUBLICO LO DEJARA ENTRAR POR DEFECTO
     if(isPublic){
       return true;
     }
 
+    //TODO: OBTENEMOS EL REQUEST
     const req = context.switchToHttp().getRequest<Request>()
-    const token = req.headers['codrr_token']
 
+    //TODO:OBTENEMOS EL HEADER QUE CONTIENE LA AUTENTICACION CON EL REQUEST 
+    const token = req.headers['codrr_token']
+    //TODO: SI ES UNA LISTA DE TOKENS O SI ESTA VACIO NO ENTRA
     if(!token || Array.isArray(token)){
       throw new UnauthorizedException('Invalid token')
     }
@@ -40,6 +44,7 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException(manageToken)
     }
 
+    //TODO: SE CALCULA SI EL TOKEN ES VALIDO DEPEDIENDO DE LA FECHA DE CADUCIDAD DEL TOKEN
     if(manageToken.isExpired){
       throw new UnauthorizedException('Token expired')
     }
@@ -57,6 +62,7 @@ export class AuthGuard implements CanActivate {
     //llega con estos datos ya dispoinibles
     //podemos hacer que estos atributos esten disponibles por medio del index.d.ts de express que definimos nuevos
     //atributos
+    //TODO: ENVIAMOS A LA PETICION QUE ENTRARA AL GUARD DE ROL PARA QUE EL GUARD PUEDA ACCEDER AL ROL Y ID FACILMENTE
     req.idUser = user.id
     req.roleUser = user.role
     return true;
