@@ -7,6 +7,7 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { AccessLevelGuard } from '../auth/guards/access-level.guard';
 import { AccessLevel } from '../auth/decorators/access-level.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
 
 @ApiTags('project')
 @Controller('project')
@@ -14,9 +15,10 @@ import { AccessLevel } from '../auth/decorators/access-level.decorator';
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
-  @Post('register')
-  create(@Body() createProjectDto: CreateProjectDto) {
-    return this.projectService.createProject(createProjectDto);
+  @Roles('CREATOR')
+  @Post('register/userOwner/:userId')
+  create(@Body() createProjectDto: CreateProjectDto,@Param('userId')userId:string) {
+    return this.projectService.createProject(createProjectDto,userId);
   }
   @Get('all')
   findAll() {
@@ -28,7 +30,7 @@ export class ProjectController {
     return this.projectService.findOne(id);
   }
 
-  @AccessLevel(40)
+  @AccessLevel('OWNER')
   @Patch('edit/:id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
     return this.projectService.updateProject(id, updateProjectDto);

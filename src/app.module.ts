@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSourceConfig } from './database/data.source';
 import { ProjectModule } from './modules/project/project.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { TasksModule } from './modules/tasks/tasks.module';
+import { DevtoolsModule } from '@nestjs/devtools-integration';
 
 @Module({
   imports: [
@@ -12,10 +14,15 @@ import { AuthModule } from './modules/auth/auth.module';
       envFilePath: `.${process.env.NODE_ENV}.env`,
       isGlobal:true
     }),
+    //TODO: ESTE MODULO ES PARA USAR EL DEVTOOLS QUE NOS AYUDA A VER LA ARQUITECTURA DE NUESTRO PROYECTO
+    DevtoolsModule.register({
+      http:process.env.NODE_ENV !== 'prod'
+    }),
     TypeOrmModule.forRoot({...DataSourceConfig}),
     UserModule,
     ProjectModule,
     AuthModule,
+    TasksModule
   ],
 })
 export class AppModule {}

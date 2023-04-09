@@ -4,7 +4,13 @@ import { ValidationPipe,ClassSerializerInterceptor } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CORS } from './constants/cors';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { logger: ['error', 'warn', 'log'], });
+  //TODO:el snaptshot es una dependencia para trabajr con el devtools module
+  //TODO: el devtools module se de instalar con el npm i @nestjs/devtools-integration
+  const app = await NestFactory.create(
+  AppModule, 
+  { logger: ['error', 'warn', 'log'],
+  snapshot: true}
+  );
   //to allow cross origin main 
   app.enableCors(CORS)
 

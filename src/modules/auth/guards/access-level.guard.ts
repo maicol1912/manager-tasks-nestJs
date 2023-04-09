@@ -1,7 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
-import { Observable } from 'rxjs';
 import { ACCESS_LEVEL_KEY, ADMIN_KEY, PUBLIC_KEY, ROLES_KEY } from 'src/constants/key-decorators';
 import { ACCESS_LEVEL, ROLES } from 'src/constants/roles';
 import { UserService } from 'src/modules/user/user.service';
@@ -67,7 +66,7 @@ export class AccessLevelGuard implements CanActivate {
 
 
     //TODO: SI EL ROL ES ADMIN POR DEFECTO LO DEJARA ENTRAR
-    if (roleUser === ROLES.ADMIN) {
+    if (roleUser === ROLES.ADMIN || roleUser === ROLES.CREATOR) {
       return true
     }
 
@@ -85,11 +84,18 @@ export class AccessLevelGuard implements CanActivate {
     }
 
     //TODO: SI EL ACCESS LEVEL QUE TIENE ES DIFERENTE AL ACCESS LEVEL QUE NECESITA EL PROYECTO LANZA UNA EXPCEION
-    if (accessLevel !== userExistInProject.accessLevel) {
+    //TODO: ESTAMOS CONTROLANDO QUE SI EL ACCES LEVEL PEDIDO ES MAYOT AL ACCESS LEVEL QUE SE TIENE 
+    //TODO: ENTONCES NO NOS DEJARIA ENTRAR
+    if (ACCESS_LEVEL[accessLevel] > ACCESS_LEVEL[userExistInProject.accessLevel]){
       throw new UnauthorizedException(
         'No tienes el nivel necesario del proyecto',
       );
     }
+    /*if (accessLevel !== userExistInProject.accessLevel) {
+      throw new UnauthorizedException(
+        'No tienes el nivel necesario del proyecto',
+      );
+    }*/
     return true;
   }
 }

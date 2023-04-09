@@ -1,4 +1,3 @@
---CREATE DATABASE IF NOT EXISTS ecommerce_nest_prod
-
-SELECT 'CREATE DATABASE ecommerce_nest_prod'
-WHERE NOT EXISTS (SELECT FROM pg_database where datname = 'ecommerce_nest_prod')\gexec
+-- CREATE DATABASE IF NOT EXISTS codrrdb
+SELECT 'CREATE DATABASE codrrdb'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'codrrdb')\gexec

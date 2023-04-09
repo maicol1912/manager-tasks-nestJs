@@ -12,5 +12,6 @@ declare namespace NodeJS{
         POSTGRES_DB:string
         HASH_SALT:number
         JWT_SECRET:string
+        NODE_ENV:string
     }
 }
