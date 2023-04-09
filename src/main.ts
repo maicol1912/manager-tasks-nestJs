@@ -32,14 +32,12 @@ async function bootstrap() {
 
   //generate documentation with swagger
   const config = new DocumentBuilder()
-    .setTitle('Task api example')
-    .setDescription('Api crud about tasks')
+    .setTitle('Maicol1912 Api')
+    .setDescription('Aplication to manage task, and projects')
     .setVersion('1.0')
-    .addTag('user')
-    .addTag('project')
     .build()
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('documentation', app, document)
+  SwaggerModule.setup('docs', app, document)
 
   await app.listen(process.env.PORT);
   console.log(`Application running on: ${await app.getUrl()}`);

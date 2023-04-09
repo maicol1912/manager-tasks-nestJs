@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
     const req = context.switchToHttp().getRequest<Request>()
 
     //TODO:OBTENEMOS EL HEADER QUE CONTIENE LA AUTENTICACION CON EL REQUEST 
-    const token = req.headers['codrr_token']
+    const token = req.headers['auth_token']
     //TODO: SI ES UNA LISTA DE TOKENS O SI ESTA VACIO NO ENTRA
     if(!token || Array.isArray(token)){
       throw new UnauthorizedException('Invalid token')

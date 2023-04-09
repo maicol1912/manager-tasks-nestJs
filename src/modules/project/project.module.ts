@@ -5,12 +5,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectEntity } from './entities/project.entity';
 import { UserProjectsEntity } from '../user/entities/usersProjects.entity';
 import { UserService } from '../user/user.service';
+import { ProvidersModule } from '../providers/providers.module';
+import { HttpCustomService } from '../providers/providers.service';
 
 @Module({
+  //TODO: NECESITAMOS IMPORTAR LOS MODULOS NECESARIOS ASI COMO EL DE PROVIDERS
   imports:[
-    TypeOrmModule.forFeature([ProjectEntity,UserProjectsEntity])
+    TypeOrmModule.forFeature([ProjectEntity,UserProjectsEntity]),
+    ProvidersModule
   ],
-  providers: [ProjectService,UserService],
+  //TODO: IMPORTAR LOS SERVICIOS NECESARIOS
+  providers: [ProjectService,UserService,HttpCustomService],
   controllers: [ProjectController],
 })
 export class ProjectModule {}

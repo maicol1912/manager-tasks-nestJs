@@ -8,13 +8,15 @@ import { ErrorManager } from 'src/utils/error.manager';
 import { UserProjectsEntity } from '../user/entities/usersProjects.entity';
 import { ACCESS_LEVEL } from 'src/constants/roles';
 import { UserService } from '../user/user.service';
+import { HttpCustomService } from '../providers/providers.service';
 
 @Injectable()
 export class ProjectService {
   constructor(
     @InjectRepository(ProjectEntity) private readonly projectRepository: Repository<ProjectEntity>,
     @InjectRepository(UserProjectsEntity)private readonly userProjectRepository: Repository<UserProjectsEntity>,
-    private readonly userService:UserService
+    private readonly userService:UserService,
+    private readonly httpService: HttpCustomService
     ) { }
 
   public async createProject(createProjectDto: CreateProjectDto,userId:string): Promise<any> {
@@ -105,5 +107,9 @@ export class ProjectService {
       throw ErrorManager.createSignatureError(error.message)
     }
     
+  }
+
+  public async listApi(){
+    return this.httpService.apiFindAll()
   }
 }
