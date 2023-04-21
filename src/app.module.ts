@@ -14,7 +14,6 @@ import { DevtoolsModule } from '@nestjs/devtools-integration';
       envFilePath: `.${process.env.NODE_ENV}.env`,
       isGlobal:true
     }),
-    //TODO: ESTE MODULO ES PARA USAR EL DEVTOOLS QUE NOS AYUDA A VER LA ARQUITECTURA DE NUESTRO PROYECTO
     DevtoolsModule.register({
       http:process.env.NODE_ENV !== 'prod'
     }),

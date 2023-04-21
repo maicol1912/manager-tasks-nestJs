@@ -5,7 +5,6 @@ import { ErrorManager } from 'src/utils/error.manager';
 
 @Injectable()
 export class HttpCustomService {
-    //TODO: SE IMPORTA EL HTTP SERVICE DE AXIOS
     constructor(private readonly httpService: HttpService) { }
 
     public async apiFindAll() {

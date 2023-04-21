@@ -3,19 +3,16 @@ import { IsNotEmpty,IsString,IsNumber,IsEnum } from "class-validator";
 import { ROLES } from "src/constants/roles";
 
 export class CreateUserDto {
-    //TODO: EL API PROPERTY ES APRA DEFINIR LOS ATRIBUTOS DE UN ESQUEMA DE DTO QUE SE DEFINA EN SWAGGER
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
     firstName:string;
 
-    //TODO: EL API PROPERTY ES APRA DEFINIR LOS ATRIBUTOS DE UN ESQUEMA DE DTO QUE SE DEFINA EN SWAGGER
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
     lastName:string;
 
-    //TODO: EL API PROPERTY ES APRA DEFINIR LOS ATRIBUTOS DE UN ESQUEMA DE DTO QUE SE DEFINA EN SWAGGER
     @ApiProperty()
     @IsNotEmpty()
     @IsNumber()

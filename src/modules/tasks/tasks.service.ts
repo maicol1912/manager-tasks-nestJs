@@ -9,7 +9,6 @@ import { ErrorManager } from 'src/utils/error.manager';
 
 @Injectable()
 export class TasksService {
-  //TODO: PARA INJECTAR EL @INJECTREPOSIUTORY NECESITAMOS IMPORTAR EL TYPEORM MODULE FORFEATURE
   constructor(
     @InjectRepository(TaskEntity)private readonly taskRepository:Repository<TaskEntity>,
     private readonly projectService: ProjectService
@@ -24,9 +23,6 @@ export class TasksService {
           message:'No se ha encontrado el proyecto'
         })
       }
-      //TODO: ESTAMOS ENVIANDO EL PROJECTO EL CUAL HARA REFERNCIA POR MEDIO DEL JOIN COLUMN
-      //TODO: EN ESTE CASO PARA QUE ESTA TAREA QUEDE REALACIONADA AL PROYECTO QUE NOSOTROS DEFINAMOS
-      //TODO: ASIGNAMOS EL OBJETO DE PROYECTO AL PROYECTO
       body.project = project
       return await this.taskRepository.save(body)
       

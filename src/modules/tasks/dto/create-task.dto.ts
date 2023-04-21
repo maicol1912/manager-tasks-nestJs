@@ -4,7 +4,6 @@ import { STATUS_TASK } from 'src/constants/status.task';
 import { CreateProjectDto } from 'src/modules/project/dto/create-project.dto';
 
 export class CreateTasksDTO {
-    //TODO: EL API PROPERTY ES APRA DEFINIR LOS ATRIBUTOS DE UN ESQUEMA DE DTO QUE SE DEFINA EN SWAGGER
     @ApiProperty()
     @IsNotEmpty()
     @IsString()

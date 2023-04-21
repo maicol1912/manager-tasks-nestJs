@@ -8,19 +8,12 @@ import { UserService } from 'src/modules/user/user.service';
 @Injectable()
 export class AccessLevelGuard implements CanActivate {
   constructor(
-    //el reflector se usa para leer la metadata enviada por medio de los decoradores
     private readonly reflector: Reflector,
     private readonly userService: UserService,
   ) { }
   async canActivate(
     context: ExecutionContext,
   ) {
-
-    //estamos validando los decoradores de los controller, es decir si el valor de el controllador es publico
-    //este puede ingresar debido a que devuelve un true
-
-    //TODO: ESTAMOS VALIDANDO SI SE ENVIO UN PUBLIC ACCESS EN LA RUTA CON EL @PUBLICACCESS, SI SE ENVIO ESTE 
-    //TODO: PUBLIC TOMA UN VALOR Y DEVUELVE UN TRUE 
     const isPublic = this.reflector.get<boolean>(
       PUBLIC_KEY,
       context.getHandler(),
@@ -29,10 +22,6 @@ export class AccessLevelGuard implements CanActivate {
     if (isPublic) {
       return true;
     }
-
-    //obtenemos el rol que enviamos por medio del metadata del decorador del controller
-    //TODO: SE OBTIENEN LOS METADATOS ENVIADOS POR MEDIO DEL DECORADOR @ROLES ESTE PUEDE RECIBIR UNA LISTA DE 
-    //TODO: ROLES COMO LO PUEDE SER EDITOR,TRABAJADOR ETC
     const roles = this.reflector.get<Array<keyof typeof ROLES>>(
       ROLES_KEY,
       context.getHandler(),

@@ -29,8 +29,6 @@ export class UserEntity extends BaseEntity implements IUser {
     @Column({type:'enum',enum:ROLES})
     role:ROLES
 
-    //TODO: RELACION UNO A MUCHOS CON LA TABLA INTERMEDIA DE PROJECTS USERS QUE REPRESENTA UNA RELACION
-    //TODO: MUCHOS A MUCHOS 
     @OneToMany(()=>UserProjectsEntity,(userProjects)=>userProjects.user)
     projectsIncludes:UserProjectsEntity[]
 }

@@ -17,7 +17,6 @@ export class TaskEntity extends BaseEntity {
     @Column()
     responsableName:string;
 
-    //TODO: RELACION DE UNO A MUCHOS, UNA TAREA PUEDE TENER SOLO UN PROYECTO
     @ManyToOne(()=>ProjectEntity,(project)=>project.tasks)
     @JoinColumn({
         name:'project_id'

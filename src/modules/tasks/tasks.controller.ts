@@ -12,12 +12,9 @@ import { ApiHeader, ApiParam, ApiTags } from '@nestjs/swagger';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  //TODO: ESTE API HEADER SE USA PARA DEFINIR QUE SE NECESITA ENVIAR UN TOKEN POR AUTORIZATION PARA 
-  //TODO: PODER ACCEDER AL RECURSO
   @ApiHeader({
     name: 'auth_token'
   })
-  //TODO: EL API PARAM SE USA PARA DEFINIR EN SWAGGER QUE PARAMETRO RECIBE ESE ENDPOINT
   @ApiParam({
     name: 'projectId'
   })

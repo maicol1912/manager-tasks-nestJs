@@ -16,12 +16,9 @@ import { PublicAccess } from '../auth/decorators/public.decorators';
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
-  //TODO: ESTE API HEADER SE USA PARA DEFINIR QUE SE NECESITA ENVIAR UN TOKEN POR AUTORIZATION PARA 
-  //TODO: PODER ACCEDER AL RECURSO
   @ApiHeader({
     name: 'auth_token'
   })
-  //TODO: EL API PARAM SE USA PARA DEFINIR EN SWAGGER QUE PARAMETRO RECIBE ESE ENDPOINT
   @ApiParam({
     name: 'userId'
   })
@@ -30,9 +27,6 @@ export class ProjectController {
   create(@Body() createProjectDto: CreateProjectDto,@Param('userId')userId:string) {
     return this.projectService.createProject(createProjectDto,userId);
   }
-
-  //TODO: ESTE API HEADER SE USA PARA DEFINIR QUE SE NECESITA ENVIAR UN TOKEN POR AUTORIZATION PARA 
-  //TODO: PODER ACCEDER AL RECURSO
   @ApiHeader({
     name: 'auth_token'
   })
@@ -41,7 +35,6 @@ export class ProjectController {
     return this.projectService.findAll();
   }
 
-  //TODO: EL API PARAM SE USA PARA DEFINIR EN SWAGGER QUE PARAMETRO RECIBE ESE ENDPOINT
   @ApiParam({
     name: 'id'
   })
@@ -50,7 +43,6 @@ export class ProjectController {
     return this.projectService.findOne(id);
   }
 
-  //TODO: EL API PARAM SE USA PARA DEFINIR EN SWAGGER QUE PARAMETRO RECIBE ESE ENDPOINT
   @ApiParam({
     name: 'id'
   })

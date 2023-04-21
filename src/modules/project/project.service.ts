@@ -52,13 +52,9 @@ export class ProjectService {
   }
 
   public async findOne(id: string): Promise<ProjectEntity> {
-    //return await this.userRepository.findOne({where:{id:id}})
     try {
       const project:ProjectEntity = await this.projectRepository.createQueryBuilder('project')
       .where({ id })
-      //se relaciona con el atributo usersIncludes que ya despues accede a la tabla de relaciones y
-      //accede a la tabla de usuarios para traer los datos 
-      //el project que se coloca en createQueryBuilder es como el nombre de la tabla
       .leftJoinAndSelect('project.usersIncludes','usersIncludes')
       .leftJoinAndSelect('usersIncludes.user','user')
       .getOne()
